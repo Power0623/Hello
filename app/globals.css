@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+:root { --ink:#20231f; --muted:#7b7f76; --line:#e6e6de; --paper:#f7f7f2; --lime:#d8f36b; --green:#405d4c; }
+* { box-sizing:border-box; }
+html, body { margin:0; min-height:100%; background:var(--paper); color:var(--ink); }
+body { font-family:Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+button { font:inherit; color:inherit; }
+.shell { min-height:100vh; display:grid; grid-template-columns:218px 1fr; }
+.sidebar { height:100vh; position:sticky; top:0; padding:34px 24px 24px; border-right:1px solid var(--line); background:#fafaf6; display:flex; flex-direction:column; }
+.brand { display:flex; align-items:center; gap:11px; padding:0 10px 42px; font:700 21px Georgia,serif; letter-spacing:-.5px; border:0; background:transparent; cursor:pointer; }
+.brand-mark { width:33px; height:33px; display:grid; place-items:center; color:#f5f5e9; background:#25352e; border-radius:50% 50% 46% 54%/55% 45% 55% 45%; font:italic 18px Georgia,serif; transform:rotate(-8deg); }
+nav { display:flex; flex-direction:column; gap:7px; }
+.nav-item { border:0; background:transparent; display:flex; align-items:center; width:100%; padding:12px 14px; border-radius:13px; gap:13px; color:#74776e; cursor:pointer; text-align:left; transition:.18s ease; }
+.nav-item:hover { background:#f0f1e9; color:var(--ink); transform:translateX(2px); }
+.nav-item.active { background:#e9eddb; color:#263a2f; font-weight:700; }
+.nav-icon { width:19px; text-align:center; font-size:18px; }
+.sidebar-foot { margin-top:auto; border-top:1px solid var(--line); padding:20px 6px 2px; display:grid; grid-template-columns:38px 1fr auto; gap:10px; align-items:center; }
+.mini-avatar { width:38px; height:38px; background:#f2caa7; color:#604630; border-radius:50%; display:grid; place-items:center; font-weight:800; }
+.sidebar-foot strong, .sidebar-foot span { display:block; }
+.sidebar-foot strong { font-size:13px; }
+.sidebar-foot span { font-size:10px; color:#8d9088; margin-top:3px; white-space:nowrap; }
+.sidebar-foot button { border:0; background:none; color:#9b9d95; cursor:pointer; }
+.workspace { padding:38px 4.5vw 54px; max-width:1500px; width:100%; margin:auto; }
+.topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; }
+.eyebrow { color:#999c93; font-size:12px; letter-spacing:.12em; margin:0 0 7px; }
+h1 { font:500 31px/1.2 Georgia,"Songti SC",serif; letter-spacing:-1.2px; margin:0; }
+.wave { display:inline-grid; margin-left:5px; width:25px; height:25px; place-items:center; border-radius:50%; background:#f3cd7c; color:#805d22; font-size:13px; transform:rotate(18deg); }
+.top-actions { display:flex; align-items:center; gap:12px; }
+.icon-button { position:relative; border:1px solid var(--line); border-radius:50%; background:#fff; width:43px; height:43px; cursor:pointer; font-size:21px; }
+.notice-dot { position:absolute; top:8px; right:8px; width:7px; height:7px; border-radius:50%; background:#ef755c; border:2px solid white; }
+.primary-button { border:0; border-radius:13px; padding:13px 18px; background:#25352e; color:white; cursor:pointer; font-weight:700; font-size:13px; box-shadow:0 8px 20px #263b3020; }
+.dashboard-grid { display:grid; grid-template-columns:minmax(0,1.42fr) minmax(290px,.76fr); gap:20px; }
+.focus-card { min-height:390px; border-radius:28px; overflow:hidden; position:relative; padding:44px 48px; display:flex; background:#3f5d4c; color:#f7f8ec; box-shadow:0 20px 50px #334a3c22; }
+.focus-card:before { content:""; position:absolute; width:330px; height:330px; border-radius:50%; background:#587360; filter:blur(1px); right:-105px; top:-135px; opacity:.65; }
+.focus-copy { position:relative; z-index:2; flex:1; }
+.pill { background:#d7ee7e; color:#3a513f; display:inline-block; border-radius:20px; padding:7px 12px; font-size:11px; font-weight:800; letter-spacing:.08em; }
+.focus-card h2 { margin:25px 0 15px; font:500 31px/1.35 Georgia,"Songti SC",serif; letter-spacing:-.8px; }
+.focus-card p { margin:0; font-size:13px; line-height:1.8; color:#d2dace; }
+.focus-button { border:1px solid #d8dfd3; background:#f8f8ef; color:#314738; border-radius:15px; padding:13px 17px; margin-top:28px; cursor:pointer; font-weight:700; font-size:13px; }
+.focus-button span { padding-left:18px; }
+.focus-controls { display:flex; align-items:center; gap:9px; }
+.reset-button { border:0; background:transparent; color:#d8dfd3; padding:13px 8px; margin-top:28px; cursor:pointer; font-size:11px; }
+.focus-orbit.is-running .focus-core { box-shadow:0 0 0 13px #d8ef7820,0 0 52px #d8ef7855; }
+.focus-orbit.is-running .orbit-two { animation-duration:7s; }
+.focus-orbit.is-running .focus-core strong { font-size:33px; font-family:Arial,sans-serif; font-variant-numeric:tabular-nums; }
+.focus-orbit { width:270px; position:relative; display:grid; place-items:center; }
+.focus-core { z-index:2; width:124px; height:124px; border-radius:50%; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#d8ef78; color:#334b3b; box-shadow:0 0 0 13px #d8ef7811,0 13px 45px #243c2b55; }
+.focus-core strong { font:500 45px/1 Georgia,serif; }
+.focus-core span { font-size:11px; margin-top:7px; letter-spacing:.12em; }
+.orbit { position:absolute; border:1px solid #d8ef7850; border-radius:50%; }
+.orbit-one { width:195px; height:195px; }
+.orbit-two { width:245px; height:245px; border-style:dashed; animation:spin 18s linear infinite; }
+.spark { position:absolute; border-radius:50%; background:#d8ef78; box-shadow:0 0 14px #d8ef78aa; }
+.spark-a { width:8px; height:8px; top:79px; right:35px; }.spark-b { width:5px; height:5px; bottom:72px; left:43px; }.spark-c { width:4px; height:4px; top:111px; left:25px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.card { background:#fff; border:1px solid #ebebe3; border-radius:24px; padding:27px 28px; box-shadow:0 8px 32px #34382e08; }
+.card-heading { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:23px; }
+.section-kicker { font-size:10px; color:#9b9e95; letter-spacing:.15em; }
+.card h3 { font:500 20px/1.3 Georgia,"Songti SC",serif; margin:7px 0 0; }
+.card-heading button { width:32px; height:32px; border:1px solid var(--line); background:#fafaf6; border-radius:50%; cursor:pointer; }
+.week-bars { height:130px; display:flex; align-items:stretch; justify-content:space-between; gap:7px; }
+.day { flex:1; display:flex; flex-direction:column; align-items:center; gap:7px; }
+.bar-track { height:102px; width:100%; background:#f1f1eb; border-radius:8px; display:flex; align-items:end; overflow:hidden; }
+.bar-track span { width:100%; display:block; border-radius:8px; background:#bac6b7; }
+.bar-track span.peak { background:#d7ee79; }
+.day em { font-style:normal; color:#9b9d95; font-size:10px; }
+.progress-note { font-size:11px; color:#898d84; margin:15px 0 0; }.progress-note strong { color:#5d7e65; }
+.tasks-card { min-height:285px; }
+.count { background:#f1f2eb; padding:6px 9px; border-radius:15px; font-size:11px; color:#777b72; }
+.task-list { display:flex; flex-direction:column; }
+.task { border:0; border-bottom:1px solid #efefe8; background:white; padding:14px 0; display:grid; grid-template-columns:24px 1fr 20px; gap:11px; text-align:left; cursor:pointer; align-items:center; }
+.check { width:21px; height:21px; border:1.5px solid #c8cbc2; border-radius:50%; display:grid; place-items:center; font-size:11px; }
+.task.done .check { background:#476451; border-color:#476451; color:white; }.task.done .task-label { color:#a1a39c; text-decoration:line-through; }
+.task-label { font-size:13px; font-weight:600; }.task-label small { display:block; color:#a2a49d; font-size:9px; font-weight:400; margin-top:4px; text-decoration:none; }
+.drag { color:#bbbdb6; transform:rotate(90deg); }
+.add-task { border:0; background:transparent; color:#728073; font-size:12px; padding:15px 0 0; cursor:pointer; font-weight:700; }
+.flame { color:#e47752; font:600 22px Georgia,serif; }.flame:before { content:'\25c6'; font-size:14px; margin-right:5px; }.flame small { color:#9fa198; font:10px Arial; }
+.habit-row { display:grid; grid-template-columns:40px 1fr 26px; gap:12px; align-items:center; padding:11px 0; }
+.compact-habit { width:100%; border:0; background:transparent; text-align:left; cursor:pointer; border-radius:13px; }
+.compact-habit:hover { background:#fafaf5; }
+.habit-symbol { width:38px; height:38px; border-radius:13px; display:grid; place-items:center; }.sunny { background:#fff0c8; color:#edae32; }.book { background:#dce8dc; color:#496451; }
+.habit-row strong,.habit-row small { display:block; }.habit-row strong { font-size:12px; }.habit-row small { font-size:9px; color:#a0a39a; margin-top:4px; }
+.habit-check { width:23px; height:23px; border-radius:50%; background:#d9ef7d; display:grid; place-items:center; color:#48603e; font-size:11px; }.habit-check.empty { background:white; border:1px solid #d5d7cf; }
+.walk { background:#e8e1f3; color:#796b93; }
+
+/* Secondary workspaces */
+.view-stack { display:flex; flex-direction:column; gap:22px; }
+.view-intro { min-height:145px; border-radius:25px; background:#e9edda; padding:29px 34px; display:flex; justify-content:space-between; align-items:center; overflow:hidden; position:relative; }
+.view-intro:after { content:''; position:absolute; width:210px; height:210px; right:-50px; bottom:-120px; border:1px solid #7d91795c; border-radius:50%; box-shadow:0 0 0 24px #70876d10,0 0 0 48px #70876d0b; }
+.view-intro>div,.view-intro>button { position:relative; z-index:1; }
+.view-intro h2 { margin:8px 0 7px; font:500 25px/1.3 Georgia,"Songti SC",serif; }
+.view-intro p { margin:0; color:#73796e; font-size:12px; }
+.large-card { background:white; border:1px solid #e9e9e1; border-radius:25px; padding:29px 32px; box-shadow:0 8px 34px #30362908; }
+.filter-row { display:flex; gap:7px; border-bottom:1px solid #ebebe5; padding-bottom:20px; }
+.filter-row button,.tag-options button { border:0; border-radius:18px; background:#f2f3ed; color:#85887f; padding:8px 14px; cursor:pointer; font-size:11px; }
+.filter-row button.selected,.tag-options button.selected { background:#31493b; color:white; }
+.full-task-list { display:flex; flex-direction:column; }
+.full-task { display:grid; grid-template-columns:28px 1fr 30px; gap:13px; align-items:center; padding:18px 3px; border-bottom:1px solid #efefe9; }
+.full-task .check { background:white; cursor:pointer; }
+.full-task.done .check { background:#476451; border-color:#476451; color:white; }
+.full-task strong,.full-task span { display:block; }
+.full-task strong { font-size:13px; }.full-task span { font-size:10px; color:#a1a49b; margin-top:5px; }
+.full-task.done strong { color:#a2a49e; text-decoration:line-through; }
+.delete-button { border:0; background:transparent; color:#b6b8b1; font-size:18px; cursor:pointer; opacity:0; transition:.15s; }
+.full-task:hover .delete-button,.delete-button:focus { opacity:1; }
+.empty-state { text-align:center; padding:45px 20px; color:#999c94; }.empty-state>span { font-size:32px; }.empty-state h3 { margin:10px 0 4px; font:500 18px Georgia,serif; color:#5d625a; }.empty-state p { margin:0; font-size:11px; }
+.streak-badge { width:90px; height:90px; border-radius:50%; background:#fff6dd; display:grid; grid-template-columns:auto auto; place-content:center; column-gap:5px; color:#dd8058; }
+.streak-badge span { font-size:13px; }.streak-badge strong { font:500 25px Georgia,serif; }.streak-badge small { grid-column:1/3; color:#99988e; font-size:8px; text-align:center; margin-top:2px; }
+.habit-table { padding-top:20px; }
+.habit-table-head,.habit-table-row { display:grid; grid-template-columns:minmax(230px,1.5fr) repeat(7,1fr); align-items:center; gap:12px; }
+.habit-table-head { padding:0 8px 13px; color:#a0a29b; font-size:10px; text-align:center; border-bottom:1px solid #ecece5; }.habit-table-head span:first-child { text-align:left; }
+.habit-table-row { padding:17px 8px; border-bottom:1px solid #efefe9; }
+.habit-table-row:last-child { border-bottom:0; }
+.habit-name { display:flex; align-items:center; gap:12px; }.habit-name strong,.habit-name small { display:block; }.habit-name strong { font-size:12px; }.habit-name small { font-size:9px; color:#a1a39b; margin-top:4px; }
+.day-check { justify-self:center; width:27px; height:27px; border:1px solid #dfe1da; background:#fff; border-radius:50%; cursor:pointer; color:#42573f; font-size:10px; }
+.day-check.checked { border-color:#d6ed78; background:#d6ed78; }
+.hint-text { margin:-10px 4px 0; color:#a3a59d; font-size:10px; }
+.goal-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.goal-card { background:white; border:1px solid #e9e9e1; border-radius:25px; padding:27px; min-height:310px; box-shadow:0 9px 35px #30362908; }
+.goal-orb { width:82px; height:82px; display:grid; place-items:center; border-radius:50%; margin-bottom:25px; position:relative; }.goal-orb:after { content:''; position:absolute; inset:7px; border-radius:50%; background:white; }.goal-orb span { position:relative; z-index:1; font:500 16px Georgia,serif; }
+.goal-card h3 { font:500 19px/1.35 Georgia,"Songti SC",serif; margin:8px 0 6px; min-height:51px; }.goal-card p { color:#9a9d94; font-size:10px; margin:0 0 21px; }
+.goal-progress { height:6px; border-radius:5px; background:#edece6; overflow:hidden; }.goal-progress span { display:block; height:100%; border-radius:5px; transition:width .25s ease; }
+.goal-actions { display:flex; justify-content:flex-end; gap:5px; margin-top:17px; }.goal-actions button { border:0; background:#f2f3ed; border-radius:15px; padding:6px 10px; cursor:pointer; color:#747971; font-size:9px; }
+.review-hero { background:#3e5c4b; color:white; border-radius:26px; padding:38px 40px; min-height:220px; position:relative; overflow:hidden; }
+.review-hero:after { content:''; position:absolute; width:260px; height:260px; border-radius:50%; border:1px dashed #d8ef7870; right:60px; top:-170px; box-shadow:0 0 0 35px #d8ef7808,0 0 0 70px #d8ef7808; }
+.review-hero .section-kicker { color:#cbd8cb; }.review-hero h2 { margin:19px 0 12px; font:500 30px/1.35 Georgia,"Songti SC",serif; }.review-hero p { color:#d5ddd2; font-size:12px; }
+.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }.stat-grid article { background:white; border:1px solid #e9e9e1; border-radius:21px; padding:24px; }.stat-grid span,.stat-grid strong,.stat-grid em { display:block; }.stat-grid span { color:#959990; font-size:10px; letter-spacing:.1em; }.stat-grid strong { font:500 32px Georgia,serif; margin:13px 0 9px; }.stat-grid strong small { font:11px Arial; }.stat-grid em { font-style:normal; color:#65816d; font-size:9px; }
+.review-chart>div:first-child h3 { margin:7px 0 0; font:500 19px Georgia,serif; }.line-chart { height:165px; margin:22px 0 10px; border-bottom:1px solid #dedfd9; position:relative; display:flex; justify-content:space-around; align-items:flex-end; }.line-chart:before,.line-chart:after { content:''; position:absolute; left:0; right:0; border-top:1px dashed #e8e9e3; }.line-chart:before { top:40px; }.line-chart:after { top:95px; }.chart-line { position:absolute; left:5%; right:5%; top:42px; height:68px; border-top:3px solid #a8c766; border-radius:50%; transform:rotate(-1deg); }.line-chart .dot { position:absolute; z-index:1; width:9px; height:9px; border:2px solid white; border-radius:50%; background:#87aa57; box-shadow:0 0 0 2px #87aa57; }.d1{left:8%;top:83px}.d2{left:27%;top:62px}.d3{left:45%;top:68px}.d4{left:63%;top:34px}.d5{left:82%;top:55px}.line-chart em { font-style:normal; font-size:9px; color:#a1a39c; margin-bottom:-18px; }.review-chart blockquote { margin:30px 0 0; padding:17px 20px; background:#f4f5ee; border-left:3px solid #d7ee79; border-radius:0 13px 13px 0; color:#666d63; font:13px/1.7 Georgia,"Songti SC",serif; }
+
+/* Capture and feedback */
+.modal-backdrop { position:fixed; inset:0; z-index:30; display:grid; place-items:center; padding:18px; background:#1e2c25aa; backdrop-filter:blur(7px); animation:fade-in .18s ease; }
+.capture-modal { width:min(480px,100%); background:#fbfbf6; border-radius:26px; padding:35px; box-shadow:0 25px 80px #0b130e66; position:relative; animation:rise-in .23s ease; }
+.modal-close { position:absolute; top:17px; right:18px; border:0; background:#efefe8; width:31px; height:31px; border-radius:50%; cursor:pointer; color:#777c74; font-size:18px; }.capture-modal h2 { font:500 25px Georgia,"Songti SC",serif; margin:9px 0 7px; }.capture-modal>p { color:#8c9087; font-size:11px; margin:0 0 24px; }.capture-modal input { width:100%; border:1px solid #dfe1d8; background:white; border-radius:14px; padding:15px 16px; outline:none; font-size:13px; }.capture-modal input:focus { border-color:#6e8a72; box-shadow:0 0 0 3px #66816d18; }.tag-options { display:flex; gap:6px; margin:13px 0 22px; }.submit-capture { width:100%; border:0; border-radius:14px; background:#31493b; color:white; padding:14px; cursor:pointer; font-weight:700; font-size:12px; }
+.toast { position:fixed; z-index:40; left:50%; bottom:32px; transform:translateX(-50%); background:#263c30; color:white; border-radius:22px; padding:11px 17px; box-shadow:0 10px 35px #2434294d; font-size:11px; animation:rise-in .22s ease; }.toast span { display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:#d8ef78; color:#344d3b; margin-right:9px; }
+@keyframes fade-in { from{opacity:0} }
+@keyframes rise-in { from{opacity:0;transform:translateY(10px)} }
+@media (max-width:900px) { .shell{grid-template-columns:76px 1fr}.sidebar{padding:28px 12px}.brand span:last-child,.nav-item span:last-child,.sidebar-foot>div:not(.mini-avatar),.sidebar-foot button{display:none}.brand{padding-left:9px}.nav-item{justify-content:center}.sidebar-foot{display:block}.dashboard-grid{grid-template-columns:1fr}.focus-card{min-height:370px}.progress-card{display:none}.goal-grid{grid-template-columns:1fr 1fr}.habit-table-head,.habit-table-row{grid-template-columns:minmax(170px,1.5fr) repeat(7,1fr);gap:6px}.review-hero:after{right:-50px}.stat-grid{gap:10px} }
+@media (max-width:620px) { .shell{display:block}.sidebar{height:68px; position:fixed; z-index:10; bottom:0; top:auto; left:0; right:0; border-top:1px solid var(--line); border-right:0; padding:8px 14px; flex-direction:row}.brand,.sidebar-foot{display:none}.sidebar nav{width:100%; flex-direction:row; justify-content:space-around}.nav-item{width:auto; padding:11px 14px}.workspace{padding:25px 17px 90px}.topbar{margin-bottom:23px}.eyebrow{font-size:10px}h1{font-size:25px}.primary-button{width:43px; height:43px; overflow:hidden; padding:0; white-space:nowrap}.focus-card{padding:31px 27px; min-height:465px; display:block}.focus-card h2{font-size:27px}.focus-orbit{position:absolute; width:200px; height:200px; right:-5px; bottom:-5px}.orbit-one{width:150px;height:150px}.orbit-two{width:190px;height:190px}.focus-core{width:98px;height:98px}.focus-core strong{font-size:37px}.focus-orbit.is-running .focus-core strong{font-size:25px}.card{padding:24px 22px}.view-intro{padding:25px 24px;min-height:170px}.view-intro h2{font-size:21px;max-width:240px}.view-intro>.primary-button{align-self:flex-end}.large-card{padding:22px 18px}.goal-grid,.stat-grid{grid-template-columns:1fr}.habit-table{overflow-x:auto}.habit-table-head,.habit-table-row{min-width:620px}.review-hero{padding:31px 26px}.review-hero h2{font-size:25px}.review-hero:after{display:none}.capture-modal{padding:31px 23px}.tag-options{flex-wrap:wrap}.toast{bottom:86px;white-space:nowrap} }
+@media (prefers-reduced-motion:reduce) { .orbit-two{animation:none}.nav-item{transition:none} }
+
+/* Personal accounts, editors, real records, and touch-friendly controls. */
+button:disabled { opacity:.45; cursor:not-allowed; }
+button:focus-visible,summary:focus-visible,a:focus-visible { outline:3px solid #78934f; outline-offset:3px; }
+.profile-link { margin-top:auto; display:flex; gap:10px; align-items:center; text-align:left; border:0; border-top:1px solid var(--line); background:none; padding:20px 0 0; cursor:pointer; }
+.profile-link strong,.profile-link small { display:block; }.profile-link strong { font-size:13px; }.profile-link small { font-size:10px; margin-top:5px; color:var(--muted); }
+.save-strip { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:#6e786a; font-size:11px; margin:-10px 0 20px; }
+.save-strip button,.inline-actions button,.week-picker button,.error-banner button,.info-banner button,.large-card>button,.import-preview button,.welcome-card>button { border:1px solid #dfe3d7; background:#f2f4eb; color:#40563e; padding:8px 12px; border-radius:10px; cursor:pointer; font-size:12px; }
+.inline-actions { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.full-task { grid-template-columns:28px minmax(0,1fr) auto; }.full-task strong,.task-label { overflow-wrap:anywhere; }
+.task { width:100%; grid-template-columns:24px 1fr; }
+.search-input { margin:18px 0 5px; width:100%; padding:12px 14px; background:#f8f9f4; border:1px solid #dfe3d7; border-radius:12px; font:inherit; font-size:13px; }
+.editor { display:flex; flex-direction:column; gap:18px; margin-top:25px; }.editor label { display:flex; flex-direction:column; gap:8px; color:#61715b; font-size:12px; }
+.editor input,.editor select { width:100%; min-width:0; border:1px solid #dfe1d8; background:white; border-radius:12px; padding:13px 14px; font:inherit; font-size:14px; color:var(--ink); }
+.editor input:focus { outline:2px solid #78934f; outline-offset:1px; }.editor p { margin:0; font-size:12px; line-height:1.8; }
+.settings-form { max-width:430px; }.settings-form .primary-button { align-self:flex-start; }
+.capture-modal { max-height:90dvh; overflow-y:auto; }.capture-modal h2 { padding-right:26px; }
+.duration-label { display:flex; align-items:center; gap:10px; margin-top:20px; font-size:11px; color:#dae5d4; }.duration-label select { border:1px solid #9ab198; border-radius:8px; background:#36523f; color:#fff; padding:7px; }
+.focus-core .clock-value { font:500 30px Arial,sans-serif; font-variant-numeric:tabular-nums; }
+.focus-orbit { min-width:220px; }.focus-card { padding:35px 32px; }
+.live-bars { height:160px; }.live-bars small { color:#718365; font-size:10px; }.live-bars .bar-track { flex:1; min-height:100px; }
+.week-picker { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:14px; }.week-picker strong { font-size:13px; font-weight:500; }
+.day-check:disabled { background:#f2f3ee; opacity:.55; }.habit-name .inline-actions { margin-top:9px; }.habit-name .inline-actions button { padding:5px 9px; font-size:10px; }
+.goal-actions { flex-wrap:wrap; }.goal-actions button { padding:9px 10px; font-size:11px; }
+.muted { font-size:12px; line-height:1.9; color:#78806f; }.error-banner,.info-banner { padding:16px 20px; border-radius:14px; margin-bottom:20px; background:#fff0df; font-size:13px; line-height:1.8; }.error-banner button { margin-right:8px; }.info-banner { background:#eaf0de; }
+.welcome { min-height:100dvh; display:grid; place-items:center; padding:30px 18px; background:radial-gradient(ellipse at top right,#dfe8ce,transparent 65%),var(--paper); }.welcome-card { width:min(100%,530px); padding:42px; border:1px solid #e0e5d7; background:#fffffff0; border-radius:30px; box-shadow:0 24px 80px #2f4b3220; }.welcome-card h1 { font-size:28px; line-height:1.5; margin:18px 0; }.welcome-card>p { font-size:13px; line-height:1.9; color:#6e7d65; }.welcome-card .primary-button { width:100%; height:auto; }
+.file-label { display:inline-flex; flex-direction:column; gap:8px; font-size:12px; color:#52674b; padding:12px; border:1px dashed #b7c3ab; border-radius:10px; }.file-label input { font-size:12px; max-width:100%; }.import-preview { background:#eef3e3; padding:15px; margin-top:20px; border-radius:12px; font-size:13px; line-height:1.8; }.import-preview button { margin-right:10px; }
+.large-card h3 { font:500 20px Georgia,"Songti SC",serif; }.large-card summary { cursor:pointer; font-size:13px; color:#5e7055; }.large-card details,.large-card p { overflow-wrap:anywhere; }
+@media(max-width:1100px) { .focus-orbit{min-width:175px;width:175px}.focus-card{padding:30px 24px}.focus-card h2{font-size:27px}.focus-orbit .orbit-two{width:190px;height:190px}.focus-orbit .orbit-one{width:155px;height:155px} }
+@media(max-width:900px) { .profile-link>span:last-child{display:none}.focus-orbit{width:250px}.progress-card{display:block}.nav-item{min-height:44px}.habit-table-row{gap:9px} }
+@media(max-width:620px) { .profile-link{display:none}.sidebar{height:74px;padding:7px}.nav-item{flex-direction:column;gap:3px;padding:4px 12px}.nav-item span:last-child{display:block;font-size:10px}.workspace{padding-bottom:105px}.topbar h1{font-size:22px;max-width:220px;overflow-wrap:anywhere}.top-actions{gap:6px}.topbar .primary-button{font-size:0;width:40px;min-width:40px}.topbar .primary-button:before{content:'+';font-size:25px}.view-intro .primary-button,.editor .primary-button{width:auto;height:auto;overflow:visible;padding:12px 16px}.view-intro{gap:16px;flex-wrap:wrap}.focus-card{padding:30px 25px;min-height:475px}.focus-orbit{width:200px;min-width:200px}.focus-core .clock-value{font-size:27px}.full-task{grid-template-columns:25px minmax(0,1fr)}.full-task>.inline-actions{grid-column:2}.week-picker{gap:8px}.week-picker strong{order:-1;flex-basis:100%;text-align:center}.save-strip{font-size:10px}.welcome-card{padding:28px}.welcome-card h1{font-size:25px}.toast{max-width:calc(100vw - 30px);white-space:normal;width:max-content;line-height:1.7}.goal-actions button{min-height:38px} }
