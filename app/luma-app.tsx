@@ -52,7 +52,7 @@ function SignIn({client}: {client: SupabaseClient}) {
     try {
       const {error} = await client.auth.signInWithOtp({email: email.trim(), options: {emailRedirectTo: `${location.origin}${location.pathname}`}});
       if (error) throw error;
-      setSent(true); setNextSend(Date.now() + 60000); setMessage('邮件已发送。请输入验证码；如果邮件中是登录链接，也可以点击链接返回。');
+      setSent(true); setNextSend(Date.now() + 60000); setMessage('验证码邮件已发送，请查看收件箱或垃圾邮件，回到此页面输入最新邮件中的数字验证码。');
     } catch {setMessage('邮件暂时未能发送，请检查邮箱地址或稍后重试。');}
     finally {setBusy(false);}
   }
@@ -62,10 +62,10 @@ function SignIn({client}: {client: SupabaseClient}) {
     catch {setMessage('验证码无效或已过期，请重试或重新发送。');}
     finally {setBusy(false);}
   }
-  return <Welcome><p>使用邮箱登录，第一次验证成功会自动创建账号。每个人拥有自己的任务、习惯和目标。</p>
+  return <Welcome><p>输入邮箱获取验证码，在此页面验证后登录。第一次验证成功会自动创建账号，每个人拥有自己的任务、习惯和目标。</p>
     <form className="editor" onSubmit={sent ? verify : send}><label>邮箱<input type="email" required autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} disabled={sent || busy} placeholder="you@example.com" /></label>
-      {sent && <label>邮件验证码<input required inputMode="numeric" autoComplete="one-time-code" minLength={6} maxLength={10} value={code} onChange={e => setCode(e.target.value)} /></label>}
-      <button className="primary-button" disabled={busy}>{busy ? '请稍候…' : sent ? '验证并进入' : '发送登录邮件'}</button>
+      {sent && <label>邮件验证码<input required inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6,10}" minLength={6} maxLength={10} placeholder="输入邮件中的数字验证码" value={code} onChange={e => setCode(e.target.value.replace(/\s/g, ''))} /></label>}
+      <button className="primary-button" disabled={busy}>{busy ? '请稍候…' : sent ? '验证并进入' : '发送验证码'}</button>
       {sent && <div className="inline-actions"><button type="button" disabled={busy} onClick={() => {setSent(false); setCode(''); setMessage('');}}>更换邮箱</button><button type="button" disabled={busy} onClick={() => void send()}>重新发送</button></div>}
       {message && <p role="status">{message}</p>}
     </form><p className="muted">任务和打卡记录仅对当前账号可见。</p></Welcome>;
